@@ -41,12 +41,19 @@ When design is approved and implementation will follow:
 - Return here when worktree ready
 
 ### Phase 5: Planning Handoff
-Ask: "Ready to create the implementation plan?"
 
-When your human partner confirms (any affirmative response):
+**First, ask where to save the plan:**
+
+Use `AskUserQuestion`:
+- "Create GitHub issue" - Save as GitHub issue
+- "Save to ./tmp directory" - Save to ./tmp/plans/ (gitignored)
+
+**Then ask:** "Ready to create the implementation plan?"
+
+When your human partner confirms:
 - Announce: "I'm using the Writing Plans skill to create the implementation plan."
+- Pass storage choice to writing-plans skill
 - Switch to skills/collaboration/writing-plans skill
-- Create detailed plan in the worktree
 
 ## When to Revisit Earlier Phases
 
