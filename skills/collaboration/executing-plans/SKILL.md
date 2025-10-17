@@ -15,6 +15,26 @@ Load plan, review critically, execute tasks in batches, report for review betwee
 
 **Announce at start:** "I'm using the Executing Plans skill to implement this plan."
 
+## Loading the Plan
+
+**If plan path not provided, prompt user:**
+
+Use `AskUserQuestion`:
+- "Load from GitHub issue" - Fetch plan from issue using `gh issue view <number>`
+- "Load from ./tmp directory" - Read from `./tmp/plans/[filename].md`
+
+**If GitHub issue:**
+```bash
+gh issue view 123 --json body --jq .body > /tmp/plan.md
+```
+
+**If ./tmp directory:**
+```bash
+ls -1t ./tmp/plans/*.md | head -1  # Show most recent
+```
+
+Then prompt for specific file or issue number.
+
 ## The Process
 
 ### Step 1: Load and Review Plan
