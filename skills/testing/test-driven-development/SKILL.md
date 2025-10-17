@@ -357,6 +357,13 @@ Bug found? Write failing test reproducing it. Follow TDD cycle. Test proves fix 
 
 Never fix bugs without a test.
 
+## Framework-Specific Guidelines
+
+**For Rails projects:**
+- Use fixtures over factories: skills/testing/rails-testing
+- Prefer unit tests over system tests
+- Mark exploratory tests as disposable
+
 ## Final Rule
 
 ```
