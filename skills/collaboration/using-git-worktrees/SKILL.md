@@ -15,6 +15,22 @@ Git worktrees create isolated workspaces sharing the same repository, allowing w
 
 **Announce at start:** "I'm using the Using Git Worktrees skill to set up an isolated workspace."
 
+## Worktree Decision
+
+**Always prompt user first:**
+
+Use `AskUserQuestion`:
+- "Create new worktree" - Set up isolated workspace in separate directory
+- "Use current directory" - Skip worktree creation, work in current location
+
+**If "Use current directory" selected:**
+- Announce: "Proceeding with implementation in current directory"
+- Skip all worktree creation steps below
+- Return to calling skill (brainstorming, etc.)
+
+**If "Create new worktree" selected:**
+- Continue with worktree creation process below
+
 ## Directory Selection Process
 
 Follow this priority order:
