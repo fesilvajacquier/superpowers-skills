@@ -17,7 +17,27 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 
 **Context:** This should be run in a dedicated worktree (created by brainstorming skill).
 
-**Save plans to:** `docs/plans/YYYY-MM-DD-<feature-name>.md`
+## Plan Storage
+
+**Before creating plan, prompt user:**
+
+Use `AskUserQuestion` tool:
+```markdown
+"Where should I save the implementation plan?"
+
+Options:
+1. "Create GitHub issue" - Save plan as GitHub issue in repository
+2. "Save to ./tmp directory" - Save to ./tmp/plans/ (gitignored)
+```
+
+**If GitHub issue selected:**
+- Create plan content as markdown
+- Use `gh issue create --title "[Feature Name] Implementation Plan" --body "$(cat plan.md)"`
+- Reference issue number in response
+
+**If ./tmp directory selected:**
+- Save to: `./tmp/plans/YYYY-MM-DD-<feature-name>.md`
+- Create directory if needed: `mkdir -p ./tmp/plans`
 
 ## Bite-Sized Task Granularity
 
@@ -98,9 +118,9 @@ git commit -m "feat: add specific feature"
 
 ## Execution Handoff
 
-After saving the plan, offer execution choice:
+After saving the plan (to GitHub issue or ./tmp), offer execution choice:
 
-**"Plan complete and saved to `docs/plans/<filename>.md`. Two execution options:**
+**"Plan complete and saved. Two execution options:**
 
 **1. Subagent-Driven (this session)** - I dispatch fresh subagent per task, review between tasks, fast iteration
 
@@ -114,5 +134,7 @@ After saving the plan, offer execution choice:
 - Fresh subagent per task + code review
 
 **If Parallel Session chosen:**
-- Guide them to open new session in worktree
+- If plan in GitHub issue: provide issue URL
+- If plan in ./tmp: provide file path
+- Guide them to open new session
 - New session uses skills/collaboration/executing-plans
