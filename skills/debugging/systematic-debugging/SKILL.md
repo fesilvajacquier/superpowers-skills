@@ -192,6 +192,8 @@ You MUST complete each phase before proceeding to the next.
    - No other tests broken?
    - Issue actually resolved?
 
+   **Commit format:** Follow rules defined in `/commit` slash command
+
 4. **If Fix Doesn't Work**
    - STOP
    - Count: How many fixes have you tried?
