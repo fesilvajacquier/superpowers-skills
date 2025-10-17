@@ -14,3 +14,6 @@ Thumbs.db
 
 # Node modules (for remembering-conversations tool)
 node_modules/
+
+# ignore tmp directory where plans are stored
+tmp/
