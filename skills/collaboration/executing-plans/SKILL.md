@@ -19,21 +19,52 @@ Load plan, review critically, execute tasks in batches, report for review betwee
 
 **If plan path not provided, prompt user:**
 
-Use `AskUserQuestion`:
-- "Load from GitHub issue" - Fetch plan from issue using `gh issue view <number>`
-- "Load from ./tmp directory" - Read from `./tmp/plans/[filename].md`
+Use `AskUserQuestion` to determine the plan source:
 
-**If GitHub issue:**
-```bash
-gh issue view 123 --json body --jq .body > /tmp/plan.md
+```typescript
+AskUserQuestion({
+  questions: [{
+    question: "Where is the plan you want to execute?",
+    header: "Plan source",
+    multiSelect: false,
+    options: [
+      {
+        label: "GitHub issue",
+        description: "Load plan from a GitHub issue using gh CLI"
+      },
+      {
+        label: "./tmp/plans directory",
+        description: "Load plan from a file in ./tmp/plans/"
+      }
+    ]
+  }]
+})
 ```
 
-**If ./tmp directory:**
-```bash
-ls -1t ./tmp/plans/*.md | head -1  # Show most recent
-```
+**If GitHub issue selected:**
 
-Then prompt for specific file or issue number.
+1. Ask user for the issue number: "Which GitHub issue number contains the plan?"
+2. Load the plan:
+   ```bash
+   gh issue view <issue-number> --json body --jq .body > /tmp/plan.md
+   ```
+3. Read `/tmp/plan.md` to load the plan
+
+**If ./tmp/plans directory selected:**
+
+1. List available plans:
+   ```bash
+   ls -1t ./tmp/plans/*.md | head -5  # Show 5 most recent
+   ```
+2. Ask user for the filename: "Which plan file do you want to execute?"
+3. Read `./tmp/plans/<filename>.md` to load the plan
+
+**Error handling:**
+
+- **If `gh` command not available:** Inform user that GitHub CLI is not installed and ask them to either install it (`gh` CLI) or provide the plan via `./tmp/plans/` directory instead
+- **If `./tmp/plans/` directory doesn't exist:** Inform user the directory doesn't exist and ask them to either create it and place the plan file there, or provide the plan via GitHub issue instead
+- **If no plan files found in `./tmp/plans/`:** Inform user no plan files were found and ask them to place a `.md` file in that directory or provide the plan via GitHub issue instead
+- **If specified GitHub issue or file doesn't exist:** Inform user the issue/file wasn't found and ask them to verify the issue number or filename
 
 ## The Process
 
