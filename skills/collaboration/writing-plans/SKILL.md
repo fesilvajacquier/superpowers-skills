@@ -21,18 +21,30 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 
 **Before creating plan, prompt user:**
 
-Use `AskUserQuestion` tool:
-```markdown
-"Where should I save the implementation plan?"
-
-Options:
-1. "Create GitHub issue" - Save plan as GitHub issue in repository
-2. "Save to ./tmp directory" - Save to ./tmp/plans/ (gitignored)
+Use `AskUserQuestion` tool with proper format:
+```json
+{
+  "questions": [{
+    "question": "Where should I save the implementation plan?",
+    "header": "Save plan",
+    "multiSelect": false,
+    "options": [
+      {
+        "label": "Create GitHub issue",
+        "description": "Save plan as GitHub issue in repository"
+      },
+      {
+        "label": "Save to ./tmp directory",
+        "description": "Save to ./tmp/plans/ (gitignored)"
+      }
+    ]
+  }]
+}
 ```
 
 **If GitHub issue selected:**
-- Create plan content as markdown
-- Use `gh issue create --title "[Feature Name] Implementation Plan" --body "$(cat plan.md)"`
+- Create plan content as markdown string (build it in memory or use heredoc)
+- Use `gh issue create --title "[Feature Name] Implementation Plan" --body "$(cat <<'EOF'\n[plan content here]\nEOF\n)"`
 - Reference issue number in response
 
 **If ./tmp directory selected:**
