@@ -90,6 +90,8 @@ Then: Cleanup worktree (Step 5)
 
 #### Option 2: Push and Create PR
 
+**PR format:** Follow rules defined in `/create-pr` slash command
+
 ```bash
 # Push branch
 git push -u origin <feature-branch>
