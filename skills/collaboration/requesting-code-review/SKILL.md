@@ -104,4 +104,10 @@ You: [Fix progress indicators]
 - Show code/tests that prove it works
 - Request clarification
 
+## After Review Approval
+
+When code review passes and you're ready to create a pull request:
+
+**PR format:** Follow rules defined in `/create-pr` slash command
+
 See template at: skills/collaboration/requesting-code-review/code-reviewer.md
