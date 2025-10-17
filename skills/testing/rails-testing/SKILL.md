@@ -3,6 +3,7 @@ name: Rails Testing with Minitest
 description: Rails-specific testing guidance using Minitest, fixtures, and unit-first approach
 when_to_use: when writing tests for Rails projects
 version: 1.0.0
+languages: ruby
 ---
 
 # Rails Testing with Minitest
@@ -11,7 +12,7 @@ version: 1.0.0
 
 Rails testing with strong preference for unit tests, fixtures over factories, and disposable tests during development.
 
-**Core principle:** Unit tests are mandatory. System tests only for critical flows. Fixtures over instances.
+**Core principle:** Unit tests are mandatory. System tests only for critical flows. Fixtures over factories.
 
 ## Testing Hierarchy
 
